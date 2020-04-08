@@ -26,6 +26,9 @@ figure .image img {
   max-height: 500px;
   overflow-y: scroll;
 }
+.results::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
 
 .title .icon {
   margin-left: 15px;

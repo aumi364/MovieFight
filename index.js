@@ -11,17 +11,46 @@ const fetchData = async (searchData) => {
   }
   return response.data.Search;
 };
-let input = document.querySelector("#input");
+widget.autocomplete();
+const input = document.querySelector("input");
+const dropdown = document.querySelector(".dropdown");
+const resultsWrapper = document.querySelector(".results");
+
 const onInput = async (event) => {
   const movies = await fetchData(event.target.value);
-  console.log(movies);
+
+  if (movies.length > 0) {
+    dropdown.classList.add("is-active");
+  }
+
   for (let movie of movies) {
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <img src="${movie.Poster}">
-      <h1> ${movie.Title}</h1>
+    const dropdownList = document.createElement("a");
+    const imgSrc = movie.Poster === "N/A" ? "" : movie.Poster;
+    dropdownList.classList.add("dropdown-item");
+    dropdownList.innerHTML = `
+      <img src="${imgSrc}">
+       ${movie.Title}
     `;
-    document.querySelector("#target").appendChild(div);
+    dropdownList.addEventListener("click", () => {
+      dropdown.classList.remove("is-active");
+      input.value = movie.Title;
+    });
+    resultsWrapper.appendChild(dropdownList);
   }
 };
 input.addEventListener("input", middleware.debouncer(onInput, 500));
+const root = document.querySelector(".autocomplete");
+//closing the dropdown
+document.addEventListener("click", () => {
+  if (!root.contains(event.target)) {
+    dropdown.classList.remove("is-active");
+  }
+});
+//clicking input toggle the dropdown
+input.addEventListener("click", () => {
+  const x = resultsWrapper.childElementCount;
+
+  if (input.contains(event.target) & (x > 0)) {
+    dropdown.classList.add("is-active");
+  }
+});
