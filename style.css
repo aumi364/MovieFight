@@ -2,6 +2,11 @@ html {
   min-height: 100%;
   background: linear-gradient(-270deg, rgb(1, 28, 32), rgb(4, 67, 83));
 }
+p,
+h1,
+h4 {
+  color: white !important;
+}
 .tutorial {
   width: 600px;
   text-align: center;
@@ -52,4 +57,24 @@ figure .image img {
 .dropdown-item img {
   height: 50px;
   margin-right: 10px;
+}
+.is-normal {
+  background: linear-gradient(-270deg, rgb(5, 26, 29), rgb(24, 25, 26));
+  color: white;
+}
+label b {
+  color: white;
+}
+article.media {
+  border: 0px solid greenyellow !important;
+  transition: border 1s ease;
+  padding: 10px;
+}
+article.media.isWinner {
+  border: 2px solid greenyellow !important;
+  border-radius: 5px;
+}
+article.media.isLoser {
+  border: 2px solid rgb(255, 47, 109);
+  border-radius: 5px;
 }
